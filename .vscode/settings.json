@@ -9,4 +9,5 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "appService.defaultWebAppToDeploy": "/subscriptions/5e05800a-fc5c-41ca-a1c5-9a3134317dd8/resourceGroups/dmsGroup/providers/Microsoft.Web/sites/azwapp",
 }
