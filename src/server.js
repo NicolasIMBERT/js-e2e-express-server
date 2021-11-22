@@ -2,9 +2,10 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const path = require('path');
 const utils = require('./utils');
-
+const data = require('./data');
 // fn to create express server
 const create = async () => {
+    const dbConnected = await data.connectToDatabase();
 
     // server
     const app = express();
@@ -15,6 +16,27 @@ const create = async () => {
 
     // root route - serve static file
     app.get('/api/hello', (req, res) => {
+        const initialData = {
+            data: [],
+            dbStatus: !!dbConnected
+        };
+        console.dir(initialData);
+        // get all items
+        // initialData.data = (dbConnected ? data.findDocuments({}) : initialData);
+        // data.findDocuments({'serial': 'VN0888'}, (cmdErr, result) => {
+        //     if (!cmdErr)
+        //         console.dir(result);
+        //     else
+        //         console.dir(cmdErr);
+
+        // });
+        // data.insertDocuments();
+        data.listDocuments();
+        // const coll = client.db('stocks').collection('Fiches');
+        // coll.find(filter, (cmdErr, result) => {
+        //   assert.equal(null, cmdErr);
+        // });
+
         res.json({hello: 'goodbye'});
         res.end();
     });
