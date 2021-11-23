@@ -20,9 +20,8 @@ let db = null;
 /* eslint no-console: 0 */
 console.log(`DB:${DATABASE_URL}`);
 
-const insertDocuments = async (
-    documents = [{ a: 1, serial:'Gronf1' }, { a: 2, serial:'Gronf2' }, { a: 3, serial:'Gronf3' }]
-) => {
+// documents = [{ a: 1, serial:'Gronf1' }, { a: 2, serial:'Gronf2' }, { a: 3, serial:'Gronf3' }]
+const insertDocuments = async (documents) => {
     // check params
     if (!db || !documents)
         throw Error('insertDocuments::missing required params');
@@ -33,9 +32,7 @@ const insertDocuments = async (
     // Insert some documents
     return await collection.insertMany(documents);
 };
-const findDocuments = async (
-    query = { 'serial': 'VN0888' }
-) => {
+const listAll = async (query = {}) => {
     
     // check params
     if (!db)
@@ -64,7 +61,7 @@ const removeDocuments = async (
     return await collection.deleteMany(docFilter);
 };
 
-const listDocuments  = async (
+const findDocument  = async (
     docFilter = {}
 ) => {
     // check params
@@ -110,9 +107,9 @@ const connectToDatabase = async () => {
 };
 module.exports = {
     insertDocuments,
-    findDocuments,
+    listAll,
     removeDocuments,
-    listDocuments,
+    findDocument,
     ObjectId,
     connectToDatabase
 };

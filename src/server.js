@@ -23,15 +23,16 @@ const create = async () => {
         console.dir(initialData);
         // get all items
         // initialData.data = (dbConnected ? data.findDocuments({}) : initialData);
-        // data.findDocuments({'serial': 'VN0888'}, (cmdErr, result) => {
-        //     if (!cmdErr)
-        //         console.dir(result);
-        //     else
-        //         console.dir(cmdErr);
+        data.findDocuments({}, (cmdErr, result) => {
+            if (!cmdErr)
+                console.dir(result);
+            else
+                console.dir(cmdErr);
 
-        // });
-        // data.insertDocuments();
-        data.listDocuments();
+        });
+        //= [{ a: 1, serial:'Gronf1' }, { a: 2, serial:'Gronf2' }, { a: 3, serial:'Gronf3' }]
+        data.insertDocuments([{ a: 5, serial:'Gronf5' }, { a: 6, serial:'Gronf6' }]);
+        // data.listDocuments();
         // const coll = client.db('stocks').collection('Fiches');
         // coll.find(filter, (cmdErr, result) => {
         //   assert.equal(null, cmdErr);
@@ -39,6 +40,30 @@ const create = async () => {
 
         res.json({hello: 'goodbye'});
         res.end();
+    });
+    app.get('/api/findbyserial/:key', (req, res) => {
+        // const szKey = parseInt(req.params.key, 2);
+        // const szKey = req.params.key;
+        
+        data.findDocument({serial: req.params.key})
+            .then(result => {
+                res.json({found: result}); 
+                res.end();
+            });
+    });
+    app.get('/api/listall', (req, res) => {
+        data.listAll({})
+            .then(result => {
+                res.json({listall: result}); 
+                res.end();
+            });
+    });
+    app.get('/api/insert', (req, res) => {
+        data.insertDocuments([{ a: 5, serial:'Gronf5' }, { a: 6, serial:'Gronf6' }])
+            .then(result => {
+                res.json({insert: result}); 
+                res.end();
+            });
     });
 
     // root route - serve static file
