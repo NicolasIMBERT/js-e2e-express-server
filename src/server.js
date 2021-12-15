@@ -31,7 +31,7 @@ const create = async () => {
 
         });
         //= [{ a: 1, serial:'Gronf1' }, { a: 2, serial:'Gronf2' }, { a: 3, serial:'Gronf3' }]
-        data.insertDocuments([{ a: 5, serial:'Gronf5' }, { a: 6, serial:'Gronf6' }]);
+        data.insertDocuments([{ a: 15, serial:'Gronf15' }, { a: 16, serial:'Gronf16' }]);
         // data.listDocuments();
         // const coll = client.db('stocks').collection('Fiches');
         // coll.find(filter, (cmdErr, result) => {
